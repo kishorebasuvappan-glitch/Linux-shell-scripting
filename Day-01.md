@@ -1,4 +1,4 @@
-## Day 01 - Linux Fundamentals & Basic Commands
+# Day 01 - Linux Fundamentals & Basic Commands
 
 # Learning Objectives
 
