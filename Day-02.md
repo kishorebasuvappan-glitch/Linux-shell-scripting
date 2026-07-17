@@ -1,4 +1,4 @@
-## Day 02 - File Management Commands
+# Day 02 - File Management Commands
 
 # Learning Objectives
 
