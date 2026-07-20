@@ -1,6 +1,6 @@
 # Day 06 - Introduction to Shell Scripting (Bash)
 
-# Learning Objectives
+## Learning Objectives
 
 By the end of Day 06, you should be able to:
 
