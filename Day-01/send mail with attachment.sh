@@ -12,14 +12,29 @@ SUBJECT="Production Maintenance Notification - $DATE"
 
 
 # ==============================
-# Run apt update and create CSV
+# Create CSV report
 # ==============================
 
 echo "Package,CurrentVersion,AvailableVersion,Pocket" > "$CSV_FILE"
 
-sudo apt list --upgradable 2>&1 | awk '
-{
-    print $1 "," $2 "," $3 "," $4
+apt list --upgradable 2>/dev/null | awk '
+NR>1 {
+    split($1, pkg, "/")
+
+    package=pkg[1]
+    pocket=pkg[2]
+    available=$2
+
+    current=""
+
+    for (i=1; i<=NF; i++) {
+        if ($i == "from:") {
+            current=$(i+1)
+            gsub(/\]/, "", current)
+        }
+    }
+
+    print package "," current "," available "," pocket
 }
 ' >> "$CSV_FILE"
 
@@ -41,7 +56,7 @@ fi
 BODY="
 This is advance notification that a maintenance window has been scheduled for the Production environment.
 
-The full list of systems in scope is in the attached spreadsheet. Additionally, there is an excel for each of the VMs containing the list of patches that are expected to be applied.
+The full list of systems in scope is in the attached spreadsheet. Additionally, there is an Excel file for each VM containing the list of patches expected to be applied.
 
 Maintenance window
 
@@ -50,7 +65,7 @@ Start: 05:00 AM
 End: 09:00 AM
 Estimated duration: 4 hours
 
-Please expect a brief outage during the maintenance window as it is a full patching session and the systems will be rebooted after the patches are applied.
+Please expect a brief outage during the maintenance window as it is a full patching session and the systems will be rebooted after patches are applied.
 
 We plan to perform the maintenance outside business hours to reduce the outage caused.
 
@@ -63,8 +78,8 @@ If you have any concerns, or need to reschedule, please contact the team.
 # ==============================
 
 echo "$BODY" | mailx \
---attach="$CSV_FILE" \
 -s "$SUBJECT" \
+ --attach="$CSV_FILE" \
 "$TO"
 
 
@@ -72,8 +87,7 @@ echo "$BODY" | mailx \
 # Check result
 # ==============================
 
-if [ $? -eq 0 ]
-then
+if [ $? -eq 0 ]; then
     echo "Mail sent successfully"
 else
     echo "Mail sending failed"
