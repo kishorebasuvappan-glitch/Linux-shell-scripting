@@ -15,11 +15,11 @@ SUBJECT="Production Maintenance Notification - $DATE"
 # Run apt update and create CSV
 # ==============================
 
-echo "Status,Repository,Details" > "$CSV_FILE"
+echo "Package,CurrentVersion,AvailableVersion,Pocket" > "$CSV_FILE"
 
-apt update 2>&1 | awk '
+sudo apt list --upgradable 2>&1 | awk '
 {
-    print $1","$2","$3
+    print $1 "," $2 "," $3 "," $4
 }
 ' >> "$CSV_FILE"
 

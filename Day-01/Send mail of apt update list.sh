@@ -10,7 +10,7 @@ CSV_FILE="/tmp/apt_update_$(date +%Y%m%d).csv"
 # Create CSV
 echo "Status,Repository,Details" > "$CSV_FILE"
 
-apt update 2>&1 | awk '{print $1","$2","$3}' >> "$CSV_FILE"
+apt-get update 2>&1 | awk '{print $1","$2","$3}' >> "$CSV_FILE"
 
 
 # Email body with dynamic date
