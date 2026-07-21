@@ -1,869 +1,795 @@
-# Day 10 - Arrays, Advanced Variables, String Operations & Arithmetic Operations
+# Day 10 - Advanced Shell Scripting
 
 # Learning Objectives
 
-By the end of Day 10, you should be able to:
+By the end of Day 10, you should understand:
 
-- Create Arrays
-- Read Array Values
-- Loop Through Arrays
-- Add and Remove Array Elements
-- Work with Strings
-- Extract Substrings
-- Replace Text in Variables
-- Perform Arithmetic Operations
-- Create Dynamic Reports
-- Build Real-World DevOps Scripts
-
----
-
-# What are Arrays?
-
-An array stores multiple values in a single variable.
-
-Without array:
-
-```bash
-server1=web01
-server2=web02
-server3=db01
-```
-
-With array:
-
-```bash
-servers=("web01" "web02" "db01")
-```
+- for loops
+- while loops
+- until loops
+- break
+- continue
+- Arrays
+- Functions Review
+- Command Line Options
+- shift
+- getopts
+- Error Handling
+- Script Best Practices
 
 ---
 
-# Creating Arrays
+# For Loop
+
+A for loop executes a block of code multiple times.
+
+## Syntax
 
 ```bash
-servers=("web01" "web02" "db01")
-```
-
----
-
-# Print Entire Array
-
-```bash
-echo "${servers[@]}"
-```
-
-Output:
-
-```text
-web01 web02 db01
-```
-
----
-
-# Print First Element
-
-```bash
-echo "${servers[0]}"
-```
-
-Output:
-
-```text
-web01
-```
-
----
-
-# Print Second Element
-
-```bash
-echo "${servers[1]}"
-```
-
-Output:
-
-```text
-web02
-```
-
----
-
-# Print Last Element
-
-```bash
-echo "${servers[2]}"
-```
-
-Output:
-
-```text
-db01
-```
-
----
-
-# Display Index Numbers
-
-```bash
-echo "${!servers[@]}"
-```
-
-Output:
-
-```text
-0 1 2
-```
-
----
-
-# Number of Elements
-
-```bash
-echo "${#servers[@]}"
-```
-
-Output:
-
-```text
-3
-```
-
----
-
-# Loop Through Array
-
-```bash
-for server in "${servers[@]}"
+for variable in list
 do
-    echo "$server"
+    commands
 done
-```
-
-Output:
-
-```text
-web01
-web02
-db01
-```
-
----
-
-# Loop Using Index
-
-```bash
-for i in "${!servers[@]}"
-do
-    echo "$i -> ${servers[$i]}"
-done
-```
-
-Output:
-
-```text
-0 -> web01
-1 -> web02
-2 -> db01
-```
-
----
-
-# Add Array Element
-
-```bash
-servers+=("app01")
-```
-
-View:
-
-```bash
-echo "${servers[@]}"
-```
-
-Output:
-
-```text
-web01 web02 db01 app01
-```
-
----
-
-# Remove Element
-
-```bash
-unset servers[1]
-```
-
-Output:
-
-```text
-web01 db01 app01
-```
-
----
-
-# Read Array Input
-
-```bash
-read -a servers
-```
-
-Input:
-
-```text
-web01 web02 db01
-```
-
-Display:
-
-```bash
-echo "${servers[@]}"
-```
-
----
-
-# String Variables
-
-```bash
-name="Kishore Basuvappan"
-```
-
-Display:
-
-```bash
-echo "$name"
-```
-
----
-
-# String Length
-
-```bash
-echo "${#name}"
-```
-
-Output:
-
-```text
-18
-```
-
----
-
-# Convert to Uppercase
-
-```bash
-echo "${name^^}"
-```
-
-Output:
-
-```text
-KISHORE BASUVAPPAN
-```
-
----
-
-# Convert to Lowercase
-
-```bash
-echo "${name,,}"
-```
-
-Output:
-
-```text
-kishore basuvappan
-```
-
----
-
-# Extract Substring
-
-Syntax:
-
-```bash
-${variable:start:length}
 ```
 
 Example:
 
 ```bash
-name="Kishore"
-```
-
-```bash
-echo "${name:0:4}"
-```
-
-Output:
-
-```text
-Kish
-```
-
----
-
-# Extract From Position
-
-```bash
-echo "${name:2}"
-```
-
-Output:
-
-```text
-shore
-```
-
----
-
-# Replace Text
-
-```bash
-name="Linux DevOps"
-```
-
-```bash
-echo "${name/DevOps/AWS}"
-```
-
-Output:
-
-```text
-Linux AWS
-```
-
----
-
-# Replace All Occurrences
-
-```bash
-text="apple apple apple"
-```
-
-```bash
-echo "${text//apple/mango}"
-```
-
-Output:
-
-```text
-mango mango mango
-```
-
----
-
-# Remove Prefix
-
-```bash
-file="/tmp/test.log"
-```
-
-```bash
-echo "${file#/tmp/}"
-```
-
-Output:
-
-```text
-test.log
-```
-
----
-
-# Remove Suffix
-
-```bash
-echo "${file%.log}"
-```
-
-Output:
-
-```text
-/tmp/test
-```
-
----
-
-# Check String Contains
-
-```bash
-name="DevOps"
-```
-
-```bash
-if [[ "$name" == *"Ops"* ]]
-then
-   echo "Found"
-fi
-```
-
----
-
-# Arithmetic Operations
-
----
-
-## Addition
-
-```bash
-echo $((10+20))
-```
-
-Output:
-
-```text
-30
-```
-
----
-
-## Subtraction
-
-```bash
-echo $((50-20))
-```
-
-Output:
-
-```text
-30
-```
-
----
-
-## Multiplication
-
-```bash
-echo $((10*5))
-```
-
-Output:
-
-```text
-50
-```
-
-*--
-
-## Division
-
-```bash
-echo $((1*0/10))
-```
-
-Output:
-
-```text
-10
-``*
-
----
-
-## Modulus
-
-```bash
-echo $(*10%3))
+for i in 1 2 3 4 5
+do
+    echo $i
+done
 ```
 
 Output:
 
 ```text
 1
-```*
----
-
-# Variables in Arithmetic
-
-`*`bash
-a=10
-b=20
-
-echo $((a+b))
-```*
-Output:
-
-```text
-30
+2
+3
+4
+5
 ```
 
 ---
 
-# I*crement
+## Range Loop
 
 ```bash
+for i in {1..10}
+do
+    echo $i
+done
+```
+
+Output:
+
+```text
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+---
+
+## File Loop
+
+```bash
+for file in *.txt
+do
+    echo "$file"
+done
+```
+*---
+
+## Directory Loop
+
+```bash
+fo* dir in *
+do
+    echo "$dir"
+done
+*``
+
+---
+
+# C Style For Loop
+
+Synta*:
+
+```bash
+for*((*=1;i<=5;i++))
+do
+    echo $i
+done
+*``
+
+Output:
+
+```text
+1
+2
+3
+*
+5
+```
+
+---
+
+# While Loop
+
+Runs*while a condition is true.
+
+## Syn*ax
+
+```bash
+while condition
+do
+   *commands
+done
+```
+
+Example:
+
+```*ash
 count=1
 
-((count+*))
-
-echo "$count"
+while [ $count -le 5 ]
+do
+    echo $count
+    count*$((count+1))
+done
 ```
 
 Output:
 
 ``*text
+*
 2
+3
+4
+5
 ```
 
 ---
 
-# Decrement
+# Reading File *ith While
 
-```b*sh
-count=5
+users.txt
 
-((count--))
+```text
+*ohn*alex
+david
+```
 
-echo "$co*nt"
+Script:
+
+```bash
+w*ile read -r user
+*o
+    echo "User: $user"
+done < us*rs.txt
 ```
 
 Output:
 
 ```text
+User:*john
+User: alex
+*ser* david
+```
+
+---
+
+# Until Loop
+
+Run* until condition becomes true.
+
+##*Syntax
+
+```bash
+until condition
+do*    commands
+done
+```
+
+Example:
+
+`*`bash
+count=1
+
+until [ $count -gt 5 ]
+do
+    echo $count
+    count=$(*count+1))
+done
+```
+
+Output:
+
+```te*t
+1
+2
+3
 4
+5
 ```
 
--*-
+---
 
-# Compound Operations
+# Break Stat*ment
+
+Stops loop execution.
+
+Examp*e:
 
 ```bash
-*(count+=5))
+for i in {1..10}
+do
+  * if [ $i -eq 5 ]
+    then
+        *reak
+    fi
+
+    echo $i
+done
+```
+*Output:
+
+```text
+1
+2
+3
+**```
+
+---
+
+# Continue Statement
+
+Sk*ps current iteration.
+
+Example:
+
+`*`bash
+for i in {1..5}
+do
+    if*[ $i -eq 3 ]
+    then
+        cont*nue
+    fi
+
+    echo $i
+done
 ```
 
-```bash
-((count-=*))
+*utput:
+
+```text
+1
+2
+4
+5
 ```
 
+---
+
+* Arrays
+
+Arrays store multiple val*es.
+
+## Create Array
+
 ```bash
-((count*=2))
+frui*s=("apple" "banana" "orange")
+```
+*---
+
+## Print First Element
+
+```ba*h
+echo ${fruits[0]}
+```
+
+Output:
+
+*``text
+apple
+```
+
+---
+
+## Print Se*ond Element
+
+```bash
+echo ${fruits*1]}
+```
+
+Output:
+
+```text
+banana
+`*`
+
+---
+
+## Print All Elements
+
+```*ash
+echo ${fruits[@]}
+```
+
+Output:*
+```text
+apple banana orange
 ```
 
 *--
 
-# Random Numbers
-
-Generate ran*om number:
+## Array Length
 
 ```bash
-echo $RANDOM
-`*`
-
-Example:
-
-```text
-25873
-```
-
---*
-
-Generate range:
-
-```bash
-echo $(*RANDOM%100))
+echo *{#fruits[@]}
 ```
 
 Output:
 
-```text*0-99
+```text*3
 ```
 
 ---
 
-# Date Arithmetic
+## Loop Through Array
+*```bash
+for fruit in "${fruits[@]}*
+do
+    echo "$fruit"
+done
+```
 
-*urrent year:
+--*
+
+# Command Line Arguments
+
+Exampl*:
 
 ```bash
-year=$(date *%Y)
-
-echo "$year"
+./script.sh one two thr*e
 ```
 
----
-
-Calcul*te age:
+Access:
 
 ```bash
-birthyear=1990
-
-e*ho $((year-birthyear))
-```
+$1
+$2
+$3
+`*`
 
 ---
 
-#*Combining Arrays and Loops
+## Count Arguments
 
 ```bas*
-servers=("web01" "web02" "db01")
+echo $#
+```
+
+Example:
+
+```bash
+./*cript.sh a b c
+```
+
+Output:
+
+```te*t
+3
+```
+
+---
+
+# Shift Command
+
+Mov*s arguments left.
+
+Example:
+
+```ba*h
+./script.sh one two three
+```
+
+I*itially:
+
+```text
+$1=one
+$2=two
+$3*three
+```
+
+After:
+
+```bash
+shift
+`*`
+
+Values become:
+
+```text
+$1=two
+*2=three
+```
+
+---
+
+# Practical Shif* Example
+
+```bash
+while [ $# -gt 0*]
+do
+    echo "$1"
+    shift
+done
 *``
 
+Run:
+
 ```bash
-for server in "${serve*s[@]}"
+./script.sh a b *
+```
+
+Output:
+
+```text
+a
+b
+c
+```
+
+*--
+
+# getopts
+
+Used for parsing co*mand-line options.
+
+Example:
+
+```b*sh
+while getopts "n:a:" opt
 do
-    echo "Checking $serv*r"
-done
+   *case $opt in
+
+       *n)
+*           name=$OPTARG
+          * ;;
+
+        a)
+            age=$O*TARG
+            ;;
+
+    esac
+done*```
+
+Run:
+
+```bash
+./script.sh -n *ishore -a 30
+```
+
+Output:
+
+```text*Name : Kishore
+Age  : 30
 ```
 
 ---
+*# Error Handling
 
-# Script Example*1
-
-Server List
-
+## Exit on Error*
 ```bash
-#!/bin/bas*
-
-servers=("web01" "web02" "db01")*
-for server in "${servers[@]}"
-do
-*   echo "$server"
-done
+set -e
 ```
 
----
+Stops script *f a command fails.
 
-#*Script Example 2
+Example:
 
-Sum of Numbers
-
-*``bash
+```b*sh
 #!/bin/bash
 
-read -p "First*Number: " a
-read -p "Second Number* " b
+set -e
 
-echo "Sum = $((a+b))"
+cp test.tx* backup/
+
+echo "Success"
 ```
 
--*-
+---
+*# Undefined Variable Protection
 
-# Script Example 3
+`*`bash
+set -u
+```
 
-String Anal*zer
+Example:
 
-```bash
-#!/bin/bash
+```bas*
+echo $name
+```
 
-read -p *Enter Text: " text
+Output:
 
-echo "Length: *{#text}"
-
-echo "Upper: ${text^^}"
-*echo "Lower: ${text,,}"
+```text
+*nbound variable
 ```
 
 ---
 
-* Script Example 4
+# Debug *ode
 
-Array and Loop
+```bash
+set -x
+```
+
+Example:
 *```bash
 #!/bin/bash
 
-users=("admin* "devops" "cloud")
+set -x
 
-for user in "$*users[@]}"
-do
-    echo "$user"
-don*
+name=*ishore
+
+echo $name
 ```
 
 ---
 
-# Production Example
-
-G*nerate Server Report
+# Com*ining Safety Options
 
 ```bash
-#!/b*n/bash
+set *eux
+```
 
-servers=("web01" "web02" "*b01")
+Common production usage:
+*```bash
+set -euo pipefail
+```
 
-echo "Server Report"
+---*
+# Trap Command
 
-for s*rver in "${servers[@]}"
-do
-    ech* "Checking $server"
+Execute command w*en script exits.
+
+Example:
+
+```bas*
+trap 'echo "Script Finished"' EXI*
+```
+
+---
+
+# Handle CTRL+C
+
+```bas*
+trap 'echo "Interrupted"; exit' I*T
+```
+
+---
+
+# Functions Review
+
+``*bash
+backup() {
+
+    cp "$1" "$2"
+*}
+```
+
+Call:
+
+```bash
+backup file.*xt backup/
+```
+
+---
+
+# Real World *xample
+
+Backup All Log Files
+
+```b*sh
+#!/bin/bash
+
+for file in *.log
+*o
+    cp "$file" backup/
 done
 ```
+*---
 
----
-*# Production Example
+# Real World Example
 
-Count Log Fi*es
-
-```bash
-files=(/var/log/*.log)*
-echo "Log Files: ${#files[@]}"
-``*
-
----
-
-# Commands and Features to *aster
+Check U*ers
 
 ```bash
-()
+#!/bin/bash
 
-[@]
-
-[#]
-
-unset*
-read -a
-
-${#var}
-
-${var:0:4}
-
-${v*r/old/new}
-
-${var//old/new}
-
-${var*^}
-
-${var,,}
-
-$(( ))
-
-((++))
-
-((--*)
-
-RANDOM
+while re*d -r user
+do
+    id "$user"
+done <*users.txt
 ```
 
 ---
 
-# Interview Qu*stions
+# Real World E*ample
 
-### What is an Array?
-
-A v*riable that stores multiple values*
-
----
-
-### How do you print all ar*ay elements?
+System Monitoring
 
 ```bash
-echo "${arra*[@]}"
+*!/bin/bash
+
+CPU=$(top -bn1 | grep *pu)
+
+MEM=$(free -h)
+
+echo "$CPU"
+
+*cho "$MEM"
 ```
 
 ---
 
-### How do you cou*t array elements?
+# Best Practi*es
+
+Always:
 
 ```bash
-echo "$*#array[@]}"
-```
+#!/bin/bash
+`*`
 
----
-
-### How do y*u get string length?
+Use:
 
 ```bash
-echo*"${#variable}"
-```
+set -euo pipefail*```
 
----
-
-### How d* you convert text to uppercase?
-
-`*`bash
-echo "${var^^}"
-```
-
----
-
-##* How do you replace text in a vari*ble?
+Quote variables:
 
 ```bash
-echo "${var/old/new}*
+"$f*le"
 ```
 
----
+Use functions.
 
-### How do you perform *rithmetic in Bash?
+Check exi* codes.
+
+Log important actions.
+
+-*-
+
+# Commands Learned
 
 ```bash
-echo $*(10+20))
+for*while
+until
+break
+continue
+
+shift
+*etopts
+
+set -e
+set -u
+set -x
+
+trap*
+arrays
+
+${array[@]}
+${#array[@]}
+*``
+
+---
+
+# Interview Questions
+
+##*Difference Between For and While?
+*For:
+
+```bash
+Known iterations
+```
+
+While:
+
+```bash
+Condition-based iterations
 ```
 
 ---
 
-### What is RAN*OM?
+## What Does Shift Do?
 
-Built-in variable that generates random numbers.
+Moves positional arguments left.
 
 ---
 
-# Lab Exercises
+## What Is getopts Used For?
+
+Parse command-line options.
+
+---
+
+## What Is set -e?
+
+Stop script when command fails.
+
+---
+
+## What Is set -u?
+
+Catch undefined variables.
+
+---
+
+## What Is set -x?
+
+Debug script execution.
+
+---
+
+## What Does Trap Do?
+
+Execute command when signal occurs.
+
+---
+
+# Practical Lab
 
 ## Lab 1
 
-Create:
-
-```bash
-arraydemo.sh
-```
-
-Store:
-
-```text
-3 server names
-```
-
-Print all values.
+Print numbers 1-20 using for loop.
 
 ---
 
 ## Lab 2
 
-Create:
-
-```bash
-calculator.sh
-```
-
-Perform:
-
-```text
-+
--
-*
-/
-```
+Read users.txt using while loop.
 
 ---
 
 ## Lab 3
 
-Create:
+Create array of servers.
 
-```bash
-stringops.sh
-```
-
-Display:
-
-```text
-Length
-Uppercase
-Lowercase
-Substring
-```
+Loop through servers.
 
 ---
 
 ## Lab 4
 
-Create:
+Create script using getopts.
+
+Accept:
 
 ```bash
-serverreport.sh
+-n
+-a
 ```
 
-Read server array and print report.
+parameters.
+
+---
+
+## Lab 5
+
+Create backup script.
+
+Copy all log files to backup directory.
 
 ---
 
@@ -871,14 +797,14 @@ Read server array and print report.
 
 ```bash
 git add Day10/
-git commit -m "Day 10 Arrays Strings and Arithmetic Operations"
+git commit -m "Day 10 Advanced Shell Scripting Loops Arrays and getopts"
 ```
 
-Or:
+Or
 
 ```bash
 git add .
-git commit -m "Day 10 advanced bash variables arrays and arithmetic"
+git commit -m "Day 10 loops arrays shift getopts trap and error handling"
 git push origin main
 ```
 
@@ -886,24 +812,30 @@ git push origin main
 
 # Day 10 Outcome
 
+✅ for loop
+
+✅ while loop
+
+✅ until loop
+
+✅ break
+
+✅ continue
+
 ✅ Arrays
 
-✅ Array Loops
+✅ shift
 
-✅ String Manipulation
+✅ getopts
 
-✅ String Search & Replace
+✅ set -e
 
-✅ Substrings
+✅ set -u
 
-✅ Arithmetic Operations
+✅ set -x
 
-✅ Increment/Decrement
+✅ trap
 
-✅ Random Numbers
+✅ Production Script Best Practices
 
-✅ Dynamic Data Processing
-
-✅ Production-Style Bash Techniques
-
-You can now build more advanced shell scripts that manage users, servers, logs, backups, and reports dynamically.
+You can now understand and write most real-world Linux Administration and DevOps shell scripts.
