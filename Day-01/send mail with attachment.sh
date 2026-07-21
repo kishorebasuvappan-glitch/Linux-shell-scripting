@@ -15,7 +15,7 @@ SUBJECT="Production Maintenance Notification - $DATE"
 # Create CSV report
 # ==============================
 
-echo "Package,CurrentVersion,AvailableVersion,Pocket" > "$CSV_FILE"
+echo '"Package","CurrentVersion","AvailableVersion","Pocket"' > "$CSV_FILE"
 
 apt list --upgradable 2>/dev/null | awk '
 NR>1 {
@@ -34,7 +34,7 @@ NR>1 {
         }
     }
 
-    print package "," current "," available "," pocket
+    printf "\"%s\",\"%s\",\"%s\",\"%s\"\n", package, current, available, pocket
 }
 ' >> "$CSV_FILE"
 
@@ -47,6 +47,9 @@ if [ ! -f "$CSV_FILE" ]; then
     echo "CSV file creation failed"
     exit 1
 fi
+
+
+echo "CSV created: $CSV_FILE"
 
 
 # ==============================
@@ -79,7 +82,7 @@ If you have any concerns, or need to reschedule, please contact the team.
 
 echo "$BODY" | mailx \
 -s "$SUBJECT" \
- --attach="$CSV_FILE" \
+-A "$CSV_FILE" \
 "$TO"
 
 
