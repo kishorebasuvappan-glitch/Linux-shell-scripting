@@ -1,795 +1,802 @@
-# Day 10 - Advanced Shell Scripting
+# Day 10 - Arrays, String Manipulation & Arithmetic Operations
 
-# Learning Objectives
+## Learning Objectives
 
-By the end of Day 10, you should understand:
+By the end of this session, you will be able to:
 
-- for loops
-- while loops
-- until loops
-- break
-- continue
-- Arrays
-- Functions Review
-- Command Line Options
-- shift
-- getopts
-- Error Handling
-- Script Best Practices
+- Create and use arrays
+- Access array elements
+- Loop through arrays
+- Manipulate strings
+- Extract substrings
+- Replace text in variables
+- Perform arithmetic calculations
+- Generate dynamic reports using Bash
 
 ---
 
-# For Loop
+# Arrays
 
-A for loop executes a block of code multiple times.
+An array stores multiple values in a single variable.
 
-## Syntax
-
-```bash
-for variable in list
-do
-    commands
-done
-```
-
-Example:
+## Create an Array
 
 ```bash
-for i in 1 2 3 4 5
-do
-    echo $i
-done
+servers=("web01" "web02" "db01")
 ```
-
-Output:
-
-```text
-1
-2
-3
-4
-5
-```
-
----
-
-## Range Loop
-
-```bash
-for i in {1..10}
-do
-    echo $i
-done
-```
-
-Output:
-
-```text
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-```
-
----
-
-## File Loop
-
-```bash
-for file in *.txt
-do
-    echo "$file"
-done
-```
-*---
-
-## Directory Loop
-
-```bash
-fo* dir in *
-do
-    echo "$dir"
-done
-*``
-
----
-
-# C Style For Loop
-
-Synta*:
-
-```bash
-for*((*=1;i<=5;i++))
-do
-    echo $i
-done
-*``
-
-Output:
-
-```text
-1
-2
-3
-*
-5
-```
-
----
-
-# While Loop
-
-Runs*while a condition is true.
-
-## Syn*ax
-
-```bash
-while condition
-do
-   *commands
-done
-```
-
-Example:
-
-```*ash
-count=1
-
-while [ $count -le 5 ]
-do
-    echo $count
-    count*$((count+1))
-done
-```
-
-Output:
-
-``*text
-*
-2
-3
-4
-5
-```
-
----
-
-# Reading File *ith While
-
-users.txt
-
-```text
-*ohn*alex
-david
-```
-
-Script:
-
-```bash
-w*ile read -r user
-*o
-    echo "User: $user"
-done < us*rs.txt
-```
-
-Output:
-
-```text
-User:*john
-User: alex
-*ser* david
-```
-
----
-
-# Until Loop
-
-Run* until condition becomes true.
-
-##*Syntax
-
-```bash
-until condition
-do*    commands
-done
-```
-
-Example:
-
-`*`bash
-count=1
-
-until [ $count -gt 5 ]
-do
-    echo $count
-    count=$(*count+1))
-done
-```
-
-Output:
-
-```te*t
-1
-2
-3
-4
-5
-```
-
----
-
-# Break Stat*ment
-
-Stops loop execution.
-
-Examp*e:
-
-```bash
-for i in {1..10}
-do
-  * if [ $i -eq 5 ]
-    then
-        *reak
-    fi
-
-    echo $i
-done
-```
-*Output:
-
-```text
-1
-2
-3
-**```
-
----
-
-# Continue Statement
-
-Sk*ps current iteration.
-
-Example:
-
-`*`bash
-for i in {1..5}
-do
-    if*[ $i -eq 3 ]
-    then
-        cont*nue
-    fi
-
-    echo $i
-done
-```
-
-*utput:
-
-```text
-1
-2
-4
-5
-```
-
----
-
-* Arrays
-
-Arrays store multiple val*es.
-
-## Create Array
-
-```bash
-frui*s=("apple" "banana" "orange")
-```
-*---
-
-## Print First Element
-
-```ba*h
-echo ${fruits[0]}
-```
-
-Output:
-
-*``text
-apple
-```
-
----
-
-## Print Se*ond Element
-
-```bash
-echo ${fruits*1]}
-```
-
-Output:
-
-```text
-banana
-`*`
-
----
 
 ## Print All Elements
 
-```*ash
-echo ${fruits[@]}
-```
-
-Output:*
-```text
-apple banana orange
-```
-
-*--
-
-## Array Length
-
 ```bash
-echo *{#fruits[@]}
+echo "${servers[@]}"
 ```
 
 Output:
 
-```text*3
+```text
+web01 web02 db01
+```
+
+---
+
+## Print First Element
+
+```bash
+echo "${servers[0]}"
+```
+
+Output:
+
+```text
+web01
+```
+
+---
+
+## Print Second Element
+
+```bash
+echo "${servers[1]}"
+```
+
+Output:
+
+```text
+web02
+```
+
+---
+
+## Print Last Element
+
+```bash
+echo "${servers[2]}"
+```
+
+Output:
+
+```text
+db01
+```
+
+---
+
+## Print Array Indexes
+
+```bash
+echo "${!servers[@]}"
+```
+
+Output:
+
+```text
+0 1 2
+```
+
+---
+
+## Count Array Elements
+
+```bash
+echo "${#servers[@]}"
+```
+
+Output:
+
+```text
+3
 ```
 
 ---
 
 ## Loop Through Array
-*```bash
-for fruit in "${fruits[@]}*
+
+```bash
+for server in "${servers[@]}"
 do
-    echo "$fruit"
+    echo "$server"
 done
 ```
 
---*
-
-# Command Line Arguments
-
-Exampl*:
-
-```bash
-./script.sh one two thr*e
-```
-
-Access:
-
-```bash
-$1
-$2
-$3
-`*`
-
----
-
-## Count Arguments
-
-```bas*
-echo $#
-```
-
-Example:
-
-```bash
-./*cript.sh a b c
-```
-
 Output:
 
-```te*t
-3
+```text
+web01
+web02
+db01
 ```
 
 ---
 
-# Shift Command
-
-Mov*s arguments left.
-
-Example:
-
-```ba*h
-./script.sh one two three
-```
-
-I*itially:
-
-```text
-$1=one
-$2=two
-$3*three
-```
-
-After:
+## Loop Using Index
 
 ```bash
-shift
-`*`
-
-Values become:
-
-```text
-$1=two
-*2=three
-```
-
----
-
-# Practical Shif* Example
-
-```bash
-while [ $# -gt 0*]
+for i in "${!servers[@]}"
 do
-    echo "$1"
-    shift
-done
-*``
-
-Run:
-
-```bash
-./script.sh a b *
-```
-
-Output:
-
-```text
-a
-b
-c
-```
-
-*--
-
-# getopts
-
-Used for parsing co*mand-line options.
-
-Example:
-
-```b*sh
-while getopts "n:a:" opt
-do
-   *case $opt in
-
-       *n)
-*           name=$OPTARG
-          * ;;
-
-        a)
-            age=$O*TARG
-            ;;
-
-    esac
-done*```
-
-Run:
-
-```bash
-./script.sh -n *ishore -a 30
-```
-
-Output:
-
-```text*Name : Kishore
-Age  : 30
-```
-
----
-*# Error Handling
-
-## Exit on Error*
-```bash
-set -e
-```
-
-Stops script *f a command fails.
-
-Example:
-
-```b*sh
-#!/bin/bash
-
-set -e
-
-cp test.tx* backup/
-
-echo "Success"
-```
-
----
-*# Undefined Variable Protection
-
-`*`bash
-set -u
-```
-
-Example:
-
-```bas*
-echo $name
-```
-
-Output:
-
-```text
-*nbound variable
-```
-
----
-
-# Debug *ode
-
-```bash
-set -x
-```
-
-Example:
-*```bash
-#!/bin/bash
-
-set -x
-
-name=*ishore
-
-echo $name
-```
-
----
-
-# Com*ining Safety Options
-
-```bash
-set *eux
-```
-
-Common production usage:
-*```bash
-set -euo pipefail
-```
-
----*
-# Trap Command
-
-Execute command w*en script exits.
-
-Example:
-
-```bas*
-trap 'echo "Script Finished"' EXI*
-```
-
----
-
-# Handle CTRL+C
-
-```bas*
-trap 'echo "Interrupted"; exit' I*T
-```
-
----
-
-# Functions Review
-
-``*bash
-backup() {
-
-    cp "$1" "$2"
-*}
-```
-
-Call:
-
-```bash
-backup file.*xt backup/
-```
-
----
-
-# Real World *xample
-
-Backup All Log Files
-
-```b*sh
-#!/bin/bash
-
-for file in *.log
-*o
-    cp "$file" backup/
+    echo "$i -> ${servers[$i]}"
 done
 ```
-*---
+
+Output:
+
+```text
+0 -> web01
+1 -> web02
+2 -> db01
+```
+
+---
+
+## Add Element
+
+```bash
+servers+=("app01")
+```
+
+Verify:
+
+```bash
+echo "${servers[@]}"
+```
+
+Output:
+
+```text
+web01 web02 db01 app01
+```
+
+---
+
+## Remove Element
+
+```bash
+unset servers[1]
+```
+
+Verify:
+
+```bash
+echo "${servers[@]}"
+```
+
+Output:
+
+```text
+web01 db01 app01
+```
+
+---
+
+## Read Array from User
+
+```bash
+read -a servers
+
+echo "${servers[@]}"
+```
+
+Input:
+
+```text
+web01 web02 db01
+```
+
+Output:
+
+```text
+web01 web02 db01
+```
+
+---
+
+# String Operations
+
+## Create String
+
+```bash
+name="Kishore Basuvappan"
+```
+
+---
+
+## Display String
+
+```bash
+echo "$name"
+```
+
+Output:
+
+```text
+Kishore Basuvappan
+```
+
+---
+
+## String Length
+
+```bash
+echo "${#name}"
+```
+
+Output:
+
+```text
+18
+```
+
+---
+
+## Convert to Uppercase
+
+```bash
+echo "${name^^}"
+```
+
+Output:
+
+```text
+KISHORE BASUVAPPAN
+```
+
+---
+
+## Convert to Lowercase
+
+```bash
+echo "${name,,}"
+```
+
+Output:
+
+```text
+kishore basuvappan
+```
+
+---
+
+## Extract Substring
+
+Syntax:
+
+```bash
+${variable:start:length}
+```
+
+Example:
+
+```bash
+name="Kishore"
+
+echo "${name:0:4}"
+```
+
+Output:
+
+```text
+Kish
+```
+
+---
+
+## Extract from Position
+
+```bash
+echo "${name:2}"
+```
+
+Output:
+
+```text
+shore
+```
+
+---
+
+## Replace Text
+
+```bash
+text="Linux DevOps"
+```
+
+```bash
+echo "${text/DevOps/AWS}"
+```
+
+Output:
+
+```text
+Linux AWS
+```
+
+---
+
+## Replace All Occurrences
+
+```bash
+text="apple apple apple"
+
+echo "${text//apple/mango}"
+```
+
+Output:
+
+```text
+mango mango mango
+```
+
+---
+
+## Remove Prefix
+
+```bash
+file="/tmp/test.log"
+
+echo "${file#/tmp/}"
+```
+
+Output:
+
+```text
+test.log
+```
+
+---
+
+## Remove Suffix
+
+```bash
+echo "${file%.log}"
+```
+
+Output:
+
+```text
+/tmp/test
+```
+
+---
+
+## String Contains
+
+```bash
+name="DevOps Engineer"
+
+if [[ "$name" == *"Ops"* ]]
+then
+    echo "Match Found"
+fi
+```
+
+Output:
+
+```text
+Match Found
+```
+
+---
+
+# Arithmetic Operations
+
+Arithmetic uses:
+
+```bash
+$(( ))
+```
+
+---
+
+## Addition
+
+```bash
+echo $((10 + 20))
+```
+
+Output:
+
+```text
+30
+```
+
+---
+
+## Subtraction
+
+```bash
+echo $((50 - 20))
+```
+
+Output:
+
+```text
+30
+```
+
+---
+
+## Multiplication
+
+```bash
+echo $((10 * 5))
+```
+
+Output:
+
+```text
+50
+```
+
+---
+
+## Division
+
+```bash
+echo $((100 / 10))
+```
+
+Output:
+
+```text
+10
+```
+
+---
+
+## Modulus
+
+```bash
+echo $((10 % 3))
+```
+
+Output:
+
+```text
+1
+```
+
+---
+
+# Arithmetic Using Variables
+
+```bash
+a=10
+b=20
+
+echo $((a+b))
+```
+
+Output:
+
+```text
+30
+```
+
+---
+
+# Increment
+
+```bash
+count=1
+
+((count++))
+
+echo "$count"
+```
+
+Output:
+
+```text
+2
+```
+
+---
+
+# Decrement
+
+```bash
+count=5
+
+((count--))
+
+echo "$count"
+```
+
+Output:
+
+```text
+4
+```
+
+---
+
+# Compound Assignment
+
+Increase:
+
+```bash
+((count+=5))
+```
+
+Decrease:
+
+```bash
+((count-=2))
+```
+
+Multiply:
+
+```bash
+((count*=2))
+```
+
+Divide:
+
+```bash
+((count/=2))
+```
+
+---
+
+# Random Numbers
+
+Generate Random Number:
+
+```bash
+echo $RANDOM
+```
+
+Output:
+
+```text
+25873
+```
+
+---
+
+Generate Value Between 0 and 99
+
+```bash
+echo $((RANDOM%100))
+```
+
+Output:
+
+```text
+42
+```
+
+---
+
+# Date Arithmetic
+
+Current Year:
+
+```bash
+year=$(date +%Y)
+
+echo "$year"
+```
+
+---
+
+Calculate Age
+
+```bash
+birthyear=1990
+
+echo $((year-birthyear))
+```
+
+---
 
 # Real World Example
 
-Check U*ers
+## Server Health Report
 
 ```bash
 #!/bin/bash
 
-while re*d -r user
+servers=("web01" "web02" "db01")
+
+for server in "${servers[@]}"
 do
-    id "$user"
-done <*users.txt
+    echo "Checking $server"
+done
 ```
 
 ---
 
-# Real World E*ample
-
-System Monitoring
+## Count Log Files
 
 ```bash
-*!/bin/bash
+files=(/var/log/*.log)
 
-CPU=$(top -bn1 | grep *pu)
-
-MEM=$(free -h)
-
-echo "$CPU"
-
-*cho "$MEM"
+echo "Total Log Files: ${#files[@]}"
 ```
 
 ---
 
-# Best Practi*es
-
-Always:
-
-```bash
-#!/bin/bash
-`*`
-
-Use:
-
-```bash
-set -euo pipefail*```
-
-Quote variables:
-
-```bash
-"$f*le"
-```
-
-Use functions.
-
-Check exi* codes.
-
-Log important actions.
-
--*-
-
-# Commands Learned
-
-```bash
-for*while
-until
-break
-continue
-
-shift
-*etopts
-
-set -e
-set -u
-set -x
-
-trap*
-arrays
-
-${array[@]}
-${#array[@]}
-*``
-
----
-
-# Interview Questions
-
-##*Difference Between For and While?
-*For:
-
-```bash
-Known iterations
-```
-
-While:
-
-```bash
-Condition-based iterations
-```
-
----
-
-## What Does Shift Do?
-
-Moves positional arguments left.
-
----
-
-## What Is getopts Used For?
-
-Parse command-line options.
-
----
-
-## What Is set -e?
-
-Stop script when command fails.
-
----
-
-## What Is set -u?
-
-Catch undefined variables.
-
----
-
-## What Is set -x?
-
-Debug script execution.
-
----
-
-## What Does Trap Do?
-
-Execute command when signal occurs.
-
----
-
-# Practical Lab
+# Lab Exercises
 
 ## Lab 1
 
-Print numbers 1-20 using for loop.
+Create:
+
+```bash
+arraydemo.sh
+```
+
+Store three server names and print them.
 
 ---
 
 ## Lab 2
 
-Read users.txt using while loop.
+Create:
+
+```bash
+calculator.sh
+```
+
+Perform:
+
+```text
+Addition
+Subtraction
+Multiplication
+Division
+```
 
 ---
 
 ## Lab 3
 
-Create array of servers.
+Create:
 
-Loop through servers.
+```bash
+stringops.sh
+```
+
+Display:
+
+```text
+Length
+Uppercase
+Lowercase
+Substring
+```
 
 ---
 
 ## Lab 4
 
-Create script using getopts.
-
-Accept:
+Create:
 
 ```bash
--n
--a
+serverreport.sh
 ```
 
-parameters.
+Read array values and display a report.
 
 ---
 
-## Lab 5
+# Important Commands
 
-Create backup script.
+```bash
+()
 
-Copy all log files to backup directory.
+[@]
+
+${array[@]}
+
+${#array[@]}
+
+unset
+
+read -a
+
+${#variable}
+
+${variable:start:length}
+
+${variable/old/new}
+
+${variable//old/new}
+
+${variable^^}
+
+${variable,,}
+
+$(( ))
+
+((count++))
+
+((count--))
+
+RANDOM
+```
+
+---
+
+# Interview Questions
+
+### What is an array?
+
+A collection of multiple values stored in one variable.
+
+---
+
+### How do you print all array values?
+
+```bash
+echo "${array[@]}"
+```
+
+---
+
+### How do you count array elements?
+
+```bash
+echo "${#array[@]}"
+```
+
+---
+
+### How do you get string length?
+
+```bash
+echo "${#variable}"
+```
+
+---
+
+### How do you convert a string to uppercase?
+
+```bash
+echo "${var^^}"
+```
+
+---
+
+### How do you replace text in a variable?
+
+```bash
+echo "${var/old/new}"
+```
+
+---
+
+### How do you perform arithmetic operations in Bash?
+
+```bash
+echo $((10+20))
+```
+
+---
+
+### What is RANDOM?
+
+A built-in Bash variable used to generate random numbers.
 
 ---
 
@@ -797,14 +804,7 @@ Copy all log files to backup directory.
 
 ```bash
 git add Day10/
-git commit -m "Day 10 Advanced Shell Scripting Loops Arrays and getopts"
-```
-
-Or
-
-```bash
-git add .
-git commit -m "Day 10 loops arrays shift getopts trap and error handling"
+git commit -m "Day 10 Arrays String Manipulation and Arithmetic"
 git push origin main
 ```
 
@@ -812,30 +812,24 @@ git push origin main
 
 # Day 10 Outcome
 
-✅ for loop
-
-✅ while loop
-
-✅ until loop
-
-✅ break
-
-✅ continue
-
 ✅ Arrays
 
-✅ shift
+✅ Array Indexing
 
-✅ getopts
+✅ Array Loops
 
-✅ set -e
+✅ String Manipulation
 
-✅ set -u
+✅ Substrings
 
-✅ set -x
+✅ Search & Replace
 
-✅ trap
+✅ Uppercase & Lowercase Conversion
 
-✅ Production Script Best Practices
+✅ Arithmetic Operations
 
-You can now understand and write most real-world Linux Administration and DevOps shell scripts.
+✅ Increment & Decrement
+
+✅ Random Number Generation
+
+✅ Dynamic Bash Scripting
