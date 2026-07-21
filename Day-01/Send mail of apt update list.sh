@@ -35,6 +35,6 @@ If you have any concerns, or need to reschedule, please contact the team.
 
 
 echo "$BODY" | mailx \
--s "Unix/Linux Production Maintenance Notification - $DATE" \
+-s "Demo Production Maintenance Notification - $DATE" \
 -a "$CSV_FILE" \
-team@example.com
+kbasuvappan@gmail.com

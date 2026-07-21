@@ -1,0 +1,13 @@
+Status,Repository,Details
+,,
+WARNING:,apt,does
+,,
+Hit:1,https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod,noble
+Hit:2,http://archive.ubuntu.com/ubuntu,noble
+Hit:3,http://archive.ubuntu.com/ubuntu,noble-updates
+Hit:4,http://security.ubuntu.com/ubuntu,noble-security
+Hit:5,http://archive.ubuntu.com/ubuntu,noble-backports
+Reading,package,lists...
+Building,dependency,tree...
+Reading,state,information...
+131,packages,can

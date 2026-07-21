@@ -4,7 +4,7 @@
 
 By the end of Day 02, you should be able to:
 
-- Create files
+- Create files 
 - View file contents
 - Copy files and directories
 - Move and rename files
