@@ -21,4 +21,3 @@
 ### Day 13 - Monitoring & Performance Troubleshooting
 ### Day 15 - Final Shell Scripting Projects & Revision
 
-``
