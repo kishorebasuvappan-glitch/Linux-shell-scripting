@@ -598,3 +598,545 @@ Start service:
 
 ```bash
 sudo systemctl start nginx
+```
+
+---
+
+Stop service:
+
+```bash
+sudo systemctl stop nginx
+```
+
+---
+
+Restart:
+
+```bash
+sudo systemctl restart nginx
+```
+
+---
+
+Reload:
+
+```bash
+sudo systemctl reload nginx
+```
+
+---
+
+Enable at boot:
+
+```bash
+sudo systemctl enable nginx
+```
+
+---
+
+Disable:
+
+```bash
+sudo systemctl disable nginx
+```
+
+---
+
+View all services:
+
+```bash
+systemctl list-units --type=service
+```
+
+---
+
+Check failed services:
+
+```bash
+systemctl --failed
+```
+
+---
+
+# Service Command
+
+Older Linux distributions.
+
+```bash
+service nginx status
+```
+
+---
+
+Start service:
+
+```bash
+service nginx start
+```
+
+---
+
+Stop:
+
+```bash
+service nginx stop
+```
+
+---
+
+# Logs
+
+## journalctl
+
+View system logs.
+
+---
+
+Complete logs:
+
+```bash
+journalctl
+```
+
+---
+
+Latest logs:
+
+```bash
+journalctl -xe
+```
+
+---
+
+Last 50 entries:
+
+```bash
+journalctl -n 50
+```
+
+---
+
+Live logs:
+
+```bash
+journalctl -f
+```
+
+---
+
+Logs for service:
+
+```bash
+journalctl -u nginx
+```
+
+---
+
+Today's logs:
+
+```bash
+journalctl --since today
+```
+
+---
+
+# Important Log Locations
+
+Ubuntu:
+
+```bash
+/var/log/syslog
+```
+
+---
+
+Authentication:
+
+```bash
+/var/log/auth.log
+```
+
+---
+
+Kernel:
+
+```bash
+dmesg
+```
+
+---
+
+# dmesg
+
+Kernel logs.
+
+```bash
+dmesg
+```
+
+---
+
+Latest kernel logs:
+
+```bash
+dmesg | tail
+```
+
+---
+
+Hardware errors:
+
+```bash
+dmesg | grep error
+```
+
+---
+
+# watch
+
+Run command repeatedly.
+
+```bash
+watch date
+```
+
+---
+
+Monitor memory:
+
+```bash
+watch free -h
+```
+
+---
+
+Monitor processes:
+
+```bash
+watch ps -ef
+```
+
+---
+
+# Practical Lab
+
+Start background process:
+
+```bash
+sleep 300 &
+```
+
+---
+
+View jobs:
+
+```bash
+jobs
+```
+
+---
+
+Find PID:
+
+```bash
+ps -ef | grep sleep
+```
+
+---
+
+Kill process:
+
+```bash
+kill PID
+```
+
+---
+
+Check memory:
+
+```bash
+free -h
+```
+
+---
+
+View CPU:
+
+```bash
+lscpu
+```
+
+---
+
+View uptime:
+
+```bash
+uptime
+```
+
+---
+
+Check services:
+
+```bash
+systemctl list-units --type=service
+```
+
+---
+
+Monitor logs:
+
+```bash
+journalctl -n 20
+```
+
+---
+
+# Commands to Master Today
+
+```bash
+ps
+ps -ef
+ps aux
+
+pstree
+
+top
+htop
+
+pidof
+pgrep
+
+kill
+kill -9
+kill -15
+killall
+pkill
+
+jobs
+bg
+fg
+
+nohup
+
+nice
+renice
+
+uptime
+
+free
+free -h
+
+vmstat
+
+lscpu
+
+systemctl
+
+service
+
+journalctl
+
+dmesg
+
+watch
+```
+
+---
+
+# Interview Questions
+
+### What is PID?
+
+Process ID.
+
+---
+
+### Difference between process and service?
+
+Process = Running program
+
+Service = Background process managed by system
+
+---
+
+### Difference between kill and kill -9?
+
+```bash
+kill
+```
+
+Graceful termination.
+
+```bash
+kill -9
+```
+
+Force termination.
+
+---
+
+### Difference between kill and pkill?
+
+```bash
+kill
+```
+
+Uses PID.
+
+```bash
+pkill
+```
+
+Uses process name.
+
+---
+
+### What is top command?
+
+Real-time process monitoring.
+
+---
+
+### What is nohup?
+
+Runs process even after logout.
+
+---
+
+### What is systemctl?
+
+Manage Linux services.
+
+---
+
+### How do you see memory usage?
+
+```bash
+free -h
+```
+
+---
+
+### How do you monitor logs continuously?
+
+```bash
+journalctl -f
+```
+
+or
+
+```bash
+tail -f logfile
+```
+
+---
+
+### How do you check service status?
+
+```bash
+systemctl status nginx
+```
+
+---
+
+# Real Production Commands
+
+Check Java Processes:
+
+```bash
+ps -ef | grep java
+```
+
+---
+
+Restart Service:
+
+```bash
+sudo systemctl restart nginx
+```
+
+---
+
+Check Failed Services:
+
+```bash
+systemctl --failed
+```
+
+---
+
+Watch Logs:
+
+```bash
+journalctl -u nginx -f
+```
+
+---
+
+Check Server Load:
+
+```bash
+uptime
+```
+
+---
+
+Check Memory:
+
+```bash
+free -h
+```
+
+---
+
+Check Disk Usage:
+
+```bash
+df -h
+```
+
+---
+
+# Git Commit
+
+```bash
+git add Day05/
+git commit -m "Day 05 - Process Management and Services"
+```
+
+Or:
+
+```bash
+git add .
+git commit -m "Day 05 Linux process monitoring and service management"
+git push origin main
+```
+
+---
+
+# Day 05 Outcome
+
+✅ Process Management
+
+✅ Process Monitoring
+
+✅ kill / pkill
+
+✅ Background Jobs
+
+✅ nohup
+
+✅ CPU & Memory Monitoring
+
+✅ Service Management
+
+✅ systemctl
+
+✅ journalctl
+
+✅ Linux Troubleshooting
+
+✅ Production Support Basics
+
+You now have the core Linux Administration foundation required before starting Shell Scripting (Day 06 onwards).
