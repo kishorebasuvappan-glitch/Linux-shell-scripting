@@ -6,26 +6,26 @@
 📘 [Day-01/Day 01 - Linux Fundamentals & Basic Commands.md]
 
 ### Day 02 - File and Directory Management
-📘 [Day 02](./Day02/READMEDay 03 - User Management & Permissions
+📘 [Day 02/ Day 02 - File Management Commands.md]
 
 ### Day 03 - Linux Users, Groups, Permissions & Sudo
-📘 ./Day03/README.md
+📘 [Day-03/Day 03 - Linux Users, Groups, Permissions & Sudo]
 
 ### Day 04 - Text Processing (grep, sed, awk)
-📘 ./Day04/README.md
+📘 [Day-04/Day 04 - Text Processing Commands (Linux Admin & DevOps)]
 
 ### Day 05 - Process Management & Services
-📘 ./Day05/README.md
+📘 [Day-05/Day 05 - Process Management, Services & Job Control]
 
 ---
 
 ## Shell Scripting
 
 ### Day 06 - Introduction to Shell Scripting
-📘 ./Day06/README.md
+📘 [Day-06/Day 06 - Introduction to Shell Scripting (Bash)]
 
 ### Day 07 - Conditional Statements & Case
-📘 ./Day07/README.md
+📘 ./Day-07/Day 07 - Conditional Statements, Test Operators & Logical Operators.md
 
 ### Day 08 - Loops (for, while, until)
 📘 [Day 08](./Day.md
