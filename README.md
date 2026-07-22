@@ -3,7 +3,7 @@
 ## Linux Fundamentals
 
 ### Day 01 - Linux Basics
-📘 [Day-01/Day 01 - Linux Fundamentals & Basic Commands.md
+📘 [Day-01/Day 01 - Linux Fundamentals & Basic Commands.md]
 
 ### Day 02 - File and Directory Management
 📘 [Day 02](./Day02/READMEDay 03 - User Management & Permissions
