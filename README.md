@@ -7,6 +7,8 @@
 
 ### Day 02 - File and Directory Management
 📘 [Day 02](./Day02/READMEDay 03 - User Management & Permissions
+
+### Day 03 - Linux Users, Groups, Permissions & Sudo
 📘 ./Day03/README.md
 
 ### Day 04 - Text Processing (grep, sed, awk)
