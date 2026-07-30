@@ -21,6 +21,7 @@ do
     else
         echo "$hostname is NOT Reachable"
         VM_Reachable="Not Reachable"
+        Zabbix_status="Need to verify once start"
     fi
   echo "-------------------------"
 printf "%s,%s,%s\n" "$hostname" "$VM_Reachable" "$Zabbix_status" >> Zabbix_agent_status.csv
